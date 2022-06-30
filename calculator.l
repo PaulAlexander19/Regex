@@ -24,7 +24,8 @@ NUM {DIGIT}+(\.{DIGIT}+)?
 		flag_operador2 = 0;
 	}
 }
-[+\-*\/%\^] {
+[^0-9|\s|\n] {
+	printf(" ->ENTRO");
 	tipoOperation = yytext[0];
 	printf("-> Operacion: %c\n", tipoOperation);
 	flag_operador2 = -1;
@@ -58,7 +59,7 @@ void evaluate(){
 		case '/': respuesta = operador1 / operador2; break;
 		case '%': respuesta = (int)operador1 % (int)operador2; break;
 		case '^': respuesta = potenciaConWhile(operador1, operador2); break;
-		default : printf("NO SE RECONOCE LA OPERACION\n");
+		default : printf("NO SE RECONOCE LA OPERACION: %c \n", tipoOperation);
 							operador1 = 0;
 							operador2 = 0;
 							flag_operador1 = 0;
