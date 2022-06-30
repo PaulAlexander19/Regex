@@ -58,11 +58,11 @@ void evaluate(){
 		case '/': respuesta = operador1 / operador2; break;
 		case '%': respuesta = (int)operador1 % (int)operador2; break;
 		case '^': respuesta = potenciaConWhile(operador1, operador2); break;
-		default : operador1 = 0;
+		default : printf("NO SE RECONOCE LA OPERACION\n");
+							operador1 = 0;
 							operador2 = 0;
 							flag_operador1 = 0;
 							flag_operador2 = 0;
-							printf("NO SE RECONOCE LA OPERACION\n");
 	}
 		printf(" -> Respuesta es: %0.2f\n", respuesta);
 }
