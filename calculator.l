@@ -7,7 +7,6 @@ char tipoOperation='0';
 DIGIT [0-9]
 NUM {DIGIT}+(\.{DIGIT}+)?
 %%
-{DIGIT} { printf("numero entero\n");}
 {NUM} {
 	if (flag_operador1 == 0){
 		operador1 = atof(yytext);
@@ -24,8 +23,7 @@ NUM {DIGIT}+(\.{DIGIT}+)?
 		flag_operador2 = 0;
 	}
 }
-[^0-9|\s|\n] {
-	printf(" ->ENTRO");
+[+\-*\/%\^] {
 	tipoOperation = yytext[0];
 	printf("-> Operacion: %c\n", tipoOperation);
 	flag_operador2 = -1;
@@ -59,11 +57,17 @@ void evaluate(){
 		case '/': respuesta = operador1 / operador2; break;
 		case '%': respuesta = (int)operador1 % (int)operador2; break;
 		case '^': respuesta = potenciaConWhile(operador1, operador2); break;
-		default : printf("NO SE RECONOCE LA OPERACION: %c \n", tipoOperation);
+		default : printf("NO SE RECONOCE LA OPERACION");
 							operador1 = 0;
 							operador2 = 0;
 							flag_operador1 = 0;
 							flag_operador2 = 0;
 	}
 		printf(" -> Respuesta es: %0.2f\n", respuesta);
+		operador1 = 0;
+		operador2 = 0;
+		respuesta = 0;
+		flag_operador1 = 0;
+		flag_operador2 = 0;
+		tipoOperation='0';
 }
